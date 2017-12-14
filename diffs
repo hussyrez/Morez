@@ -1,0 +1,409 @@
+diff --git a/Gemfile b/Gemfile
+index aaca4fe..f88bb31 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
+ 
+ # Use Capistrano for deployment
+ # gem 'capistrano-rails', group: :development
++gem 'pdfjs_viewer-rails'
+ 
+ group :development, :test do
+   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+diff --git a/Gemfile.lock b/Gemfile.lock
+index 7534ae4..050b05a 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -85,6 +85,7 @@ GEM
+       rails-dom-testing (>= 1, < 3)
+       railties (>= 4.2.0)
+       thor (>= 0.14, < 2.0)
++    json (2.1.0)
+     listen (3.1.5)
+       rb-fsevent (~> 0.9, >= 0.9.4)
+       rb-inotify (~> 0.9, >= 0.9.7)
+@@ -102,6 +103,10 @@ GEM
+     nio4r (2.1.0)
+     nokogiri (1.8.1)
+       mini_portile2 (~> 2.3.0)
++    pdfjs_viewer-rails (0.2.0)
++      json (> 1.8.4)
++      rails (> 4.2.0)
++      sass-rails (~> 5.0)
+     pg (0.21.0)
+     public_suffix (3.0.1)
+     puma (3.11.0)
+@@ -190,6 +195,7 @@ DEPENDENCIES
+   jbuilder (~> 2.5)
+   jquery-rails
+   listen (>= 3.0.5, < 3.2)
++  pdfjs_viewer-rails
+   pg (~> 0.18)
+   puma (~> 3.7)
+   rails (~> 5.1.4)
+diff --git a/app/assets/javascripts/main.coffee b/app/assets/javascripts/main.coffee
+new file mode 100644
+index 0000000..24f83d1
+--- /dev/null
++++ b/app/assets/javascripts/main.coffee
+@@ -0,0 +1,3 @@
++# Place all the behaviors and hooks related to the matching controller here.
++# All this logic will automatically be available in application.js.
++# You can use CoffeeScript in this file: http://coffeescript.org/
+diff --git a/app/assets/stylesheets/application.scss b/app/assets/stylesheets/application.scss
+index 33545b0..944a705 100644
+--- a/app/assets/stylesheets/application.scss
++++ b/app/assets/stylesheets/application.scss
+@@ -16,13 +16,85 @@
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+ 
+-.page-wrapper{
++.page-wrapper {
+ }
+ 
+-.min-padding{
++.min-padding {
+     padding: 10px;
+ }
+ 
+-body{
++body {
+     padding-top: 80px;
++}
++
++//================Console Info=============
++.console {
++    height: 500px;
++    background: #448bff;
++    padding: 10px;
++    padding-top: 50px;
++    padding-bottom: 50px;
++    
++}
++
++.console .console-window {
++    background: #4a5870;
++    height: 100%;
++    border-radius: 5px;
++    overflow: hidden;
++}
++
++.console-window-menu {
++    height: 20px;
++    background: #f7f7f7;
++    text-align: left;
++    font-size: 13px;
++    font-weight: bold;
++    margin-bottom: 10px;
++}
++
++.console-window-body {
++    font-family: 'Monaco', 'Courier New';
++    text-align: left;
++    font-size: 13px;
++    
++}
++
++.console-command{
++    color: #f7f7f7;
++}
++    
++.console-answer{
++    color: #999999;
++    margin-bottom: 20px;
++}
++
++.console-answer a {
++    color: #3a92c8;
++    text-decoration: none;
++    background: none;
++
++}
++.console-answer > a:hover {
++    text-decoration: underline;
++}
++//==============Console End===============
++
++.no-padding {
++    padding: 0;
++}
++
++.no-marging {
++    margin: 0;
++}
++
++// @media (max-width: 600px) {
++//     .terminal {
++//         padding: 0;
++//     }
++// }
++
++//===============navbar animation==============
++.nav > li > a:hover{
++    background-color:#blue;
+ }
+\ No newline at end of file
+diff --git a/app/assets/stylesheets/main.scss b/app/assets/stylesheets/main.scss
+new file mode 100644
+index 0000000..971b13c
+--- /dev/null
++++ b/app/assets/stylesheets/main.scss
+@@ -0,0 +1,3 @@
++// Place all the styles related to the Main controller here.
++// They will automatically be included in application.css.
++// You can use Sass (SCSS) here: http://sass-lang.com/
+diff --git a/app/controllers/main_controller.rb b/app/controllers/main_controller.rb
+new file mode 100644
+index 0000000..0403636
+--- /dev/null
++++ b/app/controllers/main_controller.rb
+@@ -0,0 +1,7 @@
++class MainController < ApplicationController
++  
++    def index
++        var = 12
++    end
++    
++end
+diff --git a/app/helpers/main_helper.rb b/app/helpers/main_helper.rb
+new file mode 100644
+index 0000000..826effe
+--- /dev/null
++++ b/app/helpers/main_helper.rb
+@@ -0,0 +1,2 @@
++module MainHelper
++end
+diff --git a/app/views/layouts/application.html.haml b/app/views/layouts/application.html.haml
+index e0c0dac..3efe562 100644
+--- a/app/views/layouts/application.html.haml
++++ b/app/views/layouts/application.html.haml
+@@ -18,141 +18,15 @@
+               %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-WDM-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+                 %span.sr-only Toggle navigation
+                 %span.icon-bar
++                %span.icon-bar
++                %span.icon-bar
+                 
+             #bs-WDM-navbar-collapse-1.navbar-collapse.collapse
+               %ul.nav.navbar-nav.navbar-right
+                 %li{role: "presentation"}
+                   = link_to "About"
+-      %div
+-        %h3 This is what you’ll think of me
+-        %br/
+-        It’s going down like I told you
+-        %br/
+-        This is how it’s gonna be
+-        %p
+-          I’ll be the last man standing here
+-          %br/
+-          I’m not going anywhere
+-          %br/
+-          It’s going down like I told you
+-          %br/
+-          I’ll be the last man standing here
+-        %p
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          I’ll have you beggin’ for mercy, beggin for mercy Oh
+-          %br/
+-          I’m dangerous, so dangerous
+-          %br/
+-          I’m dangerous, so dangerous
+-        %p
+-          I’m the baddest mother up in here
+-          %br/
+-          And I’m about to make it clear
+-          %br/
+-          It’s going down like I told you
+-          %br/
+-          I’m the baddest mother up in here
+-        %p
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          I’ll have you beggin’ for mercy, beggin for mercy Oh
+-          %br/
+-          I’m dangerous, so dangerous
+-          %br/
+-          I’m dangerous, so dangerous
+-        %p
+-          Get ready cause here I come
+-          %br/
+-          I’m about to come and get me some
+-          %br/
+-          Hot as smoking gun
+-          %br/
+-          So get ready cause here I come
+-        %p
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          I’ll have you beggin’ for mercy, beggin for mercy Oh
+-          %br/
+-          I’m dangerous, so dangerous
+-          %br/
+-          I’m dangerous, so dangerousThis is how it’s gonna be
+-          %br/
+-          This is what you’ll think of me
+-          %br/
+-          It’s going down like I told you
+-          %br/
+-          This is how it’s gonna be
+-        %p
+-          I’ll be the last man standing here
+-          %br/
+-          I’m not going anywhere
+-          %br/
+-          It’s going down like I told you
+-          %br/
+-          I’ll be the last man standing here
+-        %p
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          I’ll have you beggin’ for mercy, beggin for mercy Oh
+-          %br/
+-          I’m dangerous, so dangerous
+-          %br/
+-          I’m dangerous, so dangerous
+-        %p
+-          I’m the baddest mother up in here
+-          %br/
+-          And I’m about to make it clear
+-          %br/
+-          It’s going down like I told you
+-          %br/
+-          I’m the baddest mother up in here
+-        %p
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          I’ll have you beggin’ for mercy, beggin for mercy Oh
+-          %br/
+-          I’m dangerous, so dangerous
+-          %br/
+-          I’m dangerous, so dangerous
+-        %p
+-          Get ready cause here I come
+-          %br/
+-          I’m about to come and get me some
+-          %br/
+-          Hot as smoking gun
+-          %br/
+-          So get ready cause here I come
+-        %p
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          What you gonna do? I’m gonna rock you
+-          %br/
+-          I’ll have you beggin’ for mercy, beggin for mercy Oh
+-          %br/
+-          I’m dangerous, so dangerous
+-          %br/
+-          I’m dangerous, so dangerous
+-        %hr/
+\ No newline at end of file
++                %li{role: "presentation"}
++                  = link_to "Blog"
++                %li{role: "presentation"}
++                  = link_to "Contact"
++      = yield
+\ No newline at end of file
+diff --git a/app/views/main/index.html.haml b/app/views/main/index.html.haml
+new file mode 100644
+index 0000000..740350f
+--- /dev/null
++++ b/app/views/main/index.html.haml
+@@ -0,0 +1,43 @@
++.row.console.no-margin
++    .col-md-push-2.col-md-8.console-window.no-padding
++        .console-window-menu
++            &nbsp
++            MohammadRezai---Bash---x86
++        .console-window-body
++            .console-command
++                &nbsp; &gt; Mo.origin
++                %br
++            .console-answer
++                &nbsp;&nbsp;&nbsp; =&gt; "Adelaide, Australia"
++                
++            .console-command
++                &nbsp; &gt; Mo.education
++                %br
++            .console-answer
++                &nbsp;&nbsp;&nbsp; =&gt; "University of Adelaide, SA"
++
++            .console-command
++                &nbsp; &gt; Mo.major
++                %br
++            .console-answer
++                &nbsp;&nbsp;&nbsp; =&gt; "Software Engineering"
++                
++            .console-command
++                &nbsp; &gt; Mo.graduation
++                %br
++            .console-answer
++                &nbsp;&nbsp;&nbsp; =&gt; "December 2018"
++                
++            .console-command
++                &nbsp; &gt; Mo.resume
++                %br
++            .console-answer
++                &nbsp;&nbsp;&nbsp; =&gt;
++                // = link_to "display using the full viewer", pdfjs.full_path(file: "/sample.pdf")
++                
++            .console-command
++                &nbsp; &gt; Mo.email
++                %br
++            .console-answer
++                &nbsp;&nbsp;&nbsp; =&gt;
++                %a{:href => "mailto:hussy.rez@gmail.com"} hussy.rez@gmail.com
+\ No newline at end of file
+diff --git a/config/routes.rb b/config/routes.rb
+index a4b2871..14e9a30 100644
+--- a/config/routes.rb
++++ b/config/routes.rb
+@@ -1,6 +1,9 @@
+ Rails.application.routes.draw do
+   
+-  root to: 'blogs#index'
++  # mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
++  
++  root to: 'main#index'
+   resources :blogs
++  resources :main
+   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+ end
+diff --git a/test/controllers/main_controller_test.rb b/test/controllers/main_controller_test.rb
+new file mode 100644
+index 0000000..4eb7ce0
+--- /dev/null
++++ b/test/controllers/main_controller_test.rb
+@@ -0,0 +1,7 @@
++require 'test_helper'
++
++class MainControllerTest < ActionDispatch::IntegrationTest
++  # test "the truth" do
++  #   assert true
++  # end
++end

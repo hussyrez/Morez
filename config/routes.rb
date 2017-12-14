@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  # mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
+  mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
   
   root to: 'main#index'
   resources :blogs
