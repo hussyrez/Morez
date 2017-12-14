@@ -29,7 +29,6 @@ body {
 
 //================Console Info=============
 .console {
-    height: 500px;
     background: #448bff;
     padding: 10px;
     padding-top: 50px;
@@ -95,6 +94,9 @@ body {
 // }
 
 //===============navbar animation==============
+.navbar {
+    height: 52px;
+}
 .nav > li > a:hover{
     background-color:#blue;
 }
