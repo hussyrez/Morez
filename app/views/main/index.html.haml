@@ -1,7 +1,7 @@
 .row.landing-page
-	.col-md-12#landing-page
+	// #landing-page
 
-	%nav.navbar.navbar-default.navbar-fixed-top.navbar-custom{:role => "navigation"}
+	%nav.navbar.navbar-default.navbar-custom{:role => "navigation"}
 		.navbar-header.navbar-right
 			%button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#navbar-wide", "data-toggle" => "collapse", :type => "button"}
 				%span.sr-only Toggle navigation
@@ -9,14 +9,14 @@
 				%span.icon-bar
 				%span.icon-bar
 				
-		#navbar-wide.navbar-collapse.collapse
-			%ul.nav.navbar-nav.navbar-right
+		#navbar-wide.navbar-collapse.collapse.navbar-right
+			%ul.nav.navbar-nav
 				%li{role: "presentation"}
-					= link_to "About"
+					= link_to "ABOUT"
 				%li{role: "presentation"}
-					= link_to "Blog"
+					= link_to "BLOG"
 				%li{role: "presentation"}
-					= link_to "Contact"
+					= link_to "CONTACT"
 										
 .row.console.no-margin
 	.col-md-push-2.col-md-8.console-window.no-padding
