@@ -17,6 +17,9 @@
 @import "bootstrap";
 
 .page-wrapper {
+    display: block;
+    margin: 0;
+    padding: 0;
 }
 
 .min-padding {
@@ -24,10 +27,21 @@
 }
 
 body {
-    padding-top: 80px;
+    padding-top: 0;
 }
+//================Landing View=============
+.landing-page {
+    height: 100vh;
+    margin-bottom: 20px;
+    background-color: #ffdb4c;
 
-//================Console Info=============
+}
+ 
+#landing-page {
+
+}
+//================Landing View==============
+//================Console View=============
 .console {
     background: #448bff;
     padding: 10px;
@@ -95,10 +109,19 @@ body {
 
 //===============navbar animation==============
 
-// .navbar-custom {
-//   height: 50px;
-// }
+.navbar-custom {
+    background: 0 0;
+    border: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 22px;
+}
 
 .nav > li > a:hover{
-    background-color:#blue;
+    background-color: white !important;
+}
+
+.nav a {
+    color: black !important;
+    font-size: 1.5em !important;
 }

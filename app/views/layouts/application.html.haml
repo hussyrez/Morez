@@ -11,21 +11,4 @@
     
   %body
     .page-wrapper.container-fluid
-      %div
-        %nav.navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
-          .navbar-header.navbar-right
-            %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#navbar-wide", "data-toggle" => "collapse", :type => "button"}
-              %span.sr-only Toggle navigation
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
-              
-          #navbar-wide.navbar-collapse.collapse.navbar-custom
-            %ul.nav.navbar-nav.navbar-right
-              %li{role: "presentation"}
-                = link_to "About"
-              %li{role: "presentation"}
-                = link_to "Blog"
-              %li{role: "presentation"}
-                = link_to "Contact"
       = yield
