@@ -43,13 +43,24 @@ body {
 }
  
 #landing-page {
-    padding: 0;
+    padding-top: 60px;
     margin: 0;
     height: 100vh;
     width: 100%;
     background-color: #66a1ff;
     opacity: 0.9;
 
+}
+
+.landing-avatar {
+    text-align: center;
+}
+
+.landing-text {
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+    font-size: 60px;
+    color: white;
+    text-align: center;
 }
 
 //================Landing View==============

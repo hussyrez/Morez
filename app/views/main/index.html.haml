@@ -1,5 +1,15 @@
 .row.landing-page
 	.col-sm-12#landing-page
+		.row
+			.col-md-4.landing-nothing
+			.col-md-4.landing-avatar
+				= image_tag("avatar.png")
+			.col-md-4.landing-text
+				Eat
+				%br 
+				Pray
+				%br
+				Code
 
 	%nav.navbar.navbar-default.navbar-custom{:role => "navigation"}
 		.navbar-header.navbar-right
@@ -12,11 +22,11 @@
 		#navbar-wide.navbar-collapse.collapse.navbar-right
 			%ul.nav.navbar-nav
 				%li{role: "presentation"}
-					= link_to "ABOUT"
+					= link_to "About"
 				%li{role: "presentation"}
-					= link_to "BLOG"
+					= link_to "Blog"
 				%li{role: "presentation"}
-					= link_to "CONTACT"
+					= link_to "Contact"
 										
 .row.console.no-margin
 	.col-md-push-2.col-md-8.console-window.no-padding
