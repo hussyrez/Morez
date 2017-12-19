@@ -50,11 +50,14 @@ $(window).scroll(function () {
     if ($(window).scrollTop() > $( window ).height()) {
       $('.navbar-custom').addClass('navbar-fixed-top');
       $(".navbar-custom").css('background', 'white');
+      $(".navbar-custom").css('position', 'fixed');
 
     }
     
     if ($(window).scrollTop() == 0) {
       $('.navbar-custom').removeClass('navbar-fixed-top');
+      $(".navbar-custom").css('position', 'absoluste');
+
       if($(window).width() > 768){
         $(".navbar-custom").css('background', '0 0');
       }
