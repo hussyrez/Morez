@@ -67,7 +67,9 @@ $(window).scroll(function () {
 });
 
 
-
+$(document).ready(function(){ 
+  alert("hello world")
+});
 // $(document).ready(function(){       
 //             var scroll_pos = 0;
 //             $(document).scroll(function() { 
