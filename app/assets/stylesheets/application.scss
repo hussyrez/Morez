@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+ 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -43,7 +44,7 @@ body {
 }
  
 #landing-page {
-    padding-top: 60px;
+    padding-top: 100px;
     margin: 0;
     height: 100vh;
     width: 100%;
@@ -56,9 +57,14 @@ body {
     text-align: center;
 }
 
+.landing-avatar img {
+    height: 25vh;
+    width: 25vh;
+}
+
 .landing-text {
     font-family: Copperplate, "Copperplate Gothic Light", fantasy;
-    font-size: 60px;
+    font-size: 12vh;
     color: white;
     text-align: center;
 }
@@ -66,7 +72,9 @@ body {
 //================Landing View==============
 //================Console View=============
 .console {
-    background: #448bff;
+    background: #66a1ff;
+    width: 100%;
+    margin: 0;
     padding: 10px;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -133,7 +141,6 @@ body {
 //===============navbar animation==============
 .navbar-custom, #landing-page {
     width: 100%;
-    top: 0;
     position: absolute;
 }
 
@@ -146,13 +153,15 @@ body {
     padding: 0;
 }
 
-.nav > li > a:hover{
+.nav > li > a:hover {
     background-color: #66a1ff !important;
 }
 
 .nav a {
-    color: black !important;
-    font-size: 1.5em !important;
+    color: white !important;
+    font-family: 'Proxima Nova Semibold', Helvetica, san-serif; 
+    font-size: 1.6em !important;
+    font-weight: bold;
 }
 
 // .navbar-custom.affix{
@@ -173,5 +182,9 @@ body {
     padding: 0;
     width: 100%;
     background-color: #1a75ff;
+}
+
+.nav .navbar-menu {
+    margin: 0 auto;
 }
 
