@@ -37,19 +37,15 @@ body {
     margin: 0;
     padding: 0;
     margin-bottom: 20px;
-    // background-color: white;
-    background: url('https://puu.sh/yJ29j/f6901b4c28.gif') no-repeat center center white;
-    background-size: cover;
-    opacity: 1;
 }
  
 #landing-page {
     padding-top: 100px;
     margin: 0;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background-color: #66a1ff;
-    opacity: 0.9;
+    // opacity: 0.9;
 
 }
 
@@ -139,29 +135,59 @@ body {
 // }
 
 //===============navbar animation==============
-.navbar-custom, #landing-page {
-    width: 100%;
+.navbar, .navbar-custom, #landing-page {
     position: absolute;
+}
+.navbar {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+}
+
+.navbar-container {
+    width: 100%;
+    z-index: 100;
+    padding: 10px;
+    
 }
 
 .navbar-custom {
     border: 0;
-    z-index: 10;
+    height: 70px;
+    z-index: 100;
+    letter-spacing: 0.2em;
+    text-align: center;
+    padding: 0;
+    margin: 0;
 }
 
-.navbar-collapse {
+#navbar-no-mobile, #navbar-mobile {
+    height: 100% !important;
     padding: 0;
+    margin: 0;
+}
+
+.nav {
+    height: 100%;
+}
+
+#navbar-no-mobile.nav a {
+    font-size: 15 !important;
+
 }
 
 .nav > li > a:hover {
-    background-color: #66a1ff !important;
+    border-bottom: 5px solid white;
 }
 
 .nav a {
     color: white !important;
     font-family: 'Proxima Nova Semibold', Helvetica, san-serif; 
-    font-size: 1.6em !important;
     font-weight: bold;
+    font-size: 20px;
+    padding: 0;
+    height: 100%;
 }
 
 // .navbar-custom.affix{

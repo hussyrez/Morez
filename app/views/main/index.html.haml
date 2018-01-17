@@ -10,23 +10,40 @@
 				Pray
 				%br
 				Code
-
-	%nav.navbar.navbar-default.navbar-custom{:role => "navigation"}
-		.navbar-header.navbar-right
-			%button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#navbar-wide", "data-toggle" => "collapse", :type => "button"}
-				%span.sr-only Toggle navigation
-				%span.icon-bar
-				%span.icon-bar
-				%span.icon-bar
+	%nav.navbar
+		.navbar-container
+			.navbar-default
+				#navbar-mobile.navbar-header.navbar-right
+					%button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#navbar-wide", "data-toggle" => "collapse", :type => "button"}
+						%span.sr-only Toggle navigation
+						%span.icon-bar
+						%span.icon-bar
+						%span.icon-bar
+			
+				#navbar-no-mobile.navbar-collapse.collapse.navbar-right
+					%ul.nav.navbar-nav.navbar-menu
+						%li.navbar-menu-items{role: "presentation"}
+							= link_to "ABOUT"
+						%li.navbar-menu-items{role: "presentation"}
+							= link_to "BLOG"
+						%li.navbar-menu-items{role: "presentation"}
+							= link_to "CONTACT"
+	// %nav.navbar.navbar-default.navbar-custom{:role => "navigation"}
+	// 	#navbar-mobile.navbar-header.navbar-right
+	// 		%button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#navbar-wide", "data-toggle" => "collapse", :type => "button"}
+	// 			%span.sr-only Toggle navigation
+	// 			%span.icon-bar
+	// 			%span.icon-bar
+	// 			%span.icon-bar
 				
-		#navbar-wide.navbar-collapse.collapse.navbar-right
-			%ul.nav.navbar-nav.navbar-menu
-				%li.navbar-menu-items{role: "presentation"}
-					= link_to "About"
-				%li.navbar-menu-items{role: "presentation"}
-					= link_to "Blog"
-				%li.navbar-menu-items{role: "presentation"}
-					= link_to "Contact"
+	// 	#navbar-no-mobile.navbar-collapse.collapse.navbar-right
+	// 		%ul.nav.navbar-nav.navbar-menu
+	// 			%li.navbar-menu-items{role: "presentation"}
+	// 				= link_to "ABOUT"
+	// 			%li.navbar-menu-items{role: "presentation"}
+	// 				= link_to "BLOG"
+	// 			%li.navbar-menu-items{role: "presentation"}
+	// 				= link_to "CONTACT"
 										
 .row.console.no-margin
 	.col-md-push-2.col-md-8.console-window.no-padding
